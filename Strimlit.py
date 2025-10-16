@@ -83,7 +83,7 @@ try:
         text = st.text_area("News Content", placeholder="Enter the article content...", height=250)
     
     with col2:
-        subject = st.selectbox("Category", ["News", "Politics", "Government News", "Left-news", "US_News", "Middle-east", "Politics News"])
+        subject = st.selectbox("Category", ["News", "politics", "Government News", "left-news", "US_News", "Middle-east", "politicsNews"])
         st.write("")
         st.write("")
         predict_btn = st.button("Analyze", type="primary", use_container_width=True)
@@ -101,7 +101,8 @@ try:
                 c1, c2, c3 = st.columns(3)
                 
                 with c1:
-                    st.metric("Confidence", f"{score:.2%}")
+                    confidence = max(score, 1-score)
+                    st.metric("Confidence", f"{confidence:.2%}")
                 
                 with c2:
                     if score >= 0.6:
@@ -110,8 +111,10 @@ try:
                         st.error("FAKE NEWS")
                 
                 with c3:
-                    st.write(f"**Fake:** {(1-score)*100:.1f}%")
-                    st.write(f"**True:** {score*100:.1f}%")
+                    fake_percentage = (1-score)*100
+                    true_percentage = score*100
+                    st.write(f"**Fake:** {fake_percentage:.1f}%")
+                    st.write(f"**True:** {true_percentage:.1f}%")
                 
                 st.progress(float(score))
                 
