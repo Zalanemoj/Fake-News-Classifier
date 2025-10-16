@@ -11,5 +11,3 @@ torchvision
 torchaudio
 scikit-learn
 streamlit
-re
-pickle
