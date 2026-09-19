@@ -1,0 +1,26 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#e8f1fb', 'primaryTextColor': '#17324d', 'primaryBorderColor': '#4f81bd', 'lineColor': '#607d8b', 'secondaryColor': '#eef7ee', 'tertiaryColor': '#fff4e5'}}}%%
+flowchart LR
+    A[True-news CSV] --> C[Data.ipynb / General.py]
+    B[Fake-news CSV] --> C
+    C --> D[Dataset.csv\nLabel: 1 true / 0 fake]
+    D --> E[Preprocessing.ipynb]
+    E --> F[Clean title and article text]
+    F --> G[Tokenizer\n25,000-word vocabulary]
+    F --> H[Pad title to 100\nPad text to 1,500]
+    E --> I[One-hot encode\nsubject/category]
+    G --> J[tokenizer.pkl]
+    I --> K[encoder.pkl]
+    H --> L[processed_data/*.npy]
+    L --> M[Model_Traing.ipynb]
+    M --> N[Trained Keras model]
+    J --> O[Strimlit.py]
+    K --> O
+    N --> O
+    O --> P[True-news score\nFake/true result]
+
+    classDef data fill:#eef7ee,stroke:#4e8b57,color:#173d20;
+    classDef process fill:#e8f1fb,stroke:#4f81bd,color:#17324d;
+    classDef artifact fill:#fff4e5,stroke:#d48a24,color:#5b3a00;
+    class A,B,D data;
+    class C,E,F,G,H,I,M,O process;
+    class J,K,L,N,P artifact;

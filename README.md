@@ -4,6 +4,18 @@ A machine-learning project for classifying news articles as **true** or **fake**
 
 > **Important:** This project is an educational classification tool, not a fact-checking authority. A prediction is based on patterns learned from the training data and should always be verified against reliable primary sources and independent reporting.
 
+## Project overview
+
+The complete workflow is shown below. Source CSV files are labeled and merged, transformed into model-ready arrays, used to train the classifier, and then consumed by the Streamlit application for interactive inference.
+
+![Fake News Classifier workflow](docs/fake-news-workflow.png)
+
+### Model architecture
+
+The classifier combines separate recurrent representations for the title and article body with one-hot encoded subject features. The branches are merged before the final dense layers produce a sigmoid true-news score.
+
+![Fake News Classifier multi-input GRU architecture](docs/fake-news-model.png)
+
 ## Features
 
 - Combines three inputs: news title, article text, and subject/category.
@@ -23,6 +35,10 @@ A machine-learning project for classifying news articles as **true** or **fake**
 | `Preprocessing.ipynb` | Notebook for cleaning text, splitting the data, fitting the tokenizer/encoder, and exporting processed arrays. |
 | `Model_Traing.ipynb` | Notebook for loading processed arrays, defining and training the neural network, and evaluating it. |
 | `Prediction.ipynb` | Notebook for loading the tokenizer, encoder, and trained model and generating predictions. |
+| `docs/fake-news-workflow.mmd` | Mermaid source for the project workflow diagram. |
+| `docs/fake-news-workflow.png` | Rendered workflow diagram embedded in this README. |
+| `docs/fake-news-model.mmd` | Mermaid source for the multi-input GRU architecture diagram. |
+| `docs/fake-news-model.png` | Rendered model architecture diagram embedded in this README. |
 | `tokenizer.pkl` | Serialized tokenizer used to convert text into integer sequences. |
 | `encoder.pkl` | Serialized one-hot encoder used for the subject/category input. |
 | `requirements.txt` | Python dependencies used by the notebooks and Streamlit app. |

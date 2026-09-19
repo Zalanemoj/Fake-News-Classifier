@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#e8f1fb', 'primaryTextColor': '#17324d', 'primaryBorderColor': '#4f81bd', 'lineColor': '#607d8b', 'secondaryColor': '#eef7ee', 'tertiaryColor': '#fff4e5'}}}%%
+flowchart TB
+    T[Title tokens\nshape: 100] --> ET[Shared Embedding]
+    X[Article-text tokens\nshape: 1,500] --> EX[Shared Embedding]
+    S[One-hot subject features] --> CAT[Concatenate]
+    ET --> GT[GRU\n64 units]
+    EX --> GX[GRU\n128 units]
+    GT --> CAT
+    GX --> CAT
+    CAT --> D[Dense\n128 units, ReLU]
+    D --> DO[Dropout\n0.5]
+    DO --> O[Dense\n1 unit, sigmoid]
+    O --> Y[True-news score]
+
+    classDef input fill:#eef7ee,stroke:#4e8b57,color:#173d20;
+    classDef layer fill:#e8f1fb,stroke:#4f81bd,color:#17324d;
+    classDef output fill:#fff4e5,stroke:#d48a24,color:#5b3a00;
+    class T,X,S input;
+    class ET,EX,GT,GX,CAT,D,DO layer;
+    class O,Y output;
